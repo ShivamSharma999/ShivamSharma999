@@ -7,7 +7,7 @@ const projects = [
         image: "assets/sanatan-ai.png",
         link: "https://sanatan-ai.vercel.app/",
         github: "https://github.com/ShivamSharma999/Sanatan-AI",
-        terms: ["AI", "Vercel", "Gemini AI", "Spirituality", "Express", "Electron"]
+        terms: ["OAuth", "Resend", "Vercel", "Gemini AI", "Spirituality", "NextJS", "React"]
     },
     {
         title: "Bhagavat Gita",
