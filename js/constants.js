@@ -3,11 +3,11 @@ const projects = [
     {
         title: "Sanatan AI",
         shortDescription: "A Google Gen-AI powered chatbot that provides insights into Sanatan Dharma.",
-        description: "A Google Gen-AI powered chatbot that provides insights into Sanatan Dharma, answering questions and offering guidance on topics relating them to spiritual concepts. Availabe on desktop",
+        description: "A Google Gen-AI powered NextJS fullstack chatbot that provides insights into Sanatan Dharma, answering questions and offering guidance on topics relating them to spiritual concepts. Availabe on desktop",
         image: "assets/sanatan-ai.png",
         link: "https://sanatan-ai.vercel.app/",
-        github: "https://github.com/ShivamSharma999/Sanatan-AI",
-        terms: ["OAuth", "Resend", "Vercel", "Gemini AI", "Spirituality", "NextJS", "React"]
+        github: "https://github.com/thesanatanai/sanatanai",
+        terms: ["OAuth", "Resend", "Vercel", "Gemini AI", "Spirituality", "NextJS", "React", "TauriJS", "Tavliy"]
     },
     {
         title: "Bhagavat Gita",
@@ -52,7 +52,7 @@ const skills = [
         description: "ReactJS and Next.JS web development skills for large-scale, production-ready, beautiful and functional projects",
         icon: null,
         lordIcon: "./assets/icons/react.json",
-        progress: 60
+        progress: 90
     },
     {
         name: "Git & Github",
@@ -63,10 +63,31 @@ const skills = [
     },
     {
         name: "Express",
-        description: "Express JS backend developing for building secure, functional and production ready backend projects.",
+        description: "Express JS backend developing for building secure, functional and production ready backend projects and REST APIs.",
         icon: null,
         lordIcon: './assets/icons/cloud.json',
         progress: 90
+    },
+    {
+        name: "MongoDB and Supabase",
+        description: "MongoDB and Supabase skills for building secure, functional and production ready backend projects and data management systems.",
+        icon: null,
+        lordIcon: './assets/icons/db.json',
+        progress: 80
+    },
+    {
+        name: "Tauri and Electron",
+        description: "TauriJS and Electron skills for building cross-platform desktop applications with web technologies.",
+        icon: null,
+        lordIcon: './assets/icons/desktop.json',
+        progress: 80
+    },
+    {
+        name: "GenAI",
+        description: "Generative AI skills for integrating AI capabilities into applications, including response generation, query processing, and feedback understanding.",
+        icon: null,
+        lordIcon: './assets/icons/ai.json',
+        progress: 70
     }
 
 ];

@@ -7,8 +7,9 @@ const $ = (selector) => document.querySelector(selector),
     isMobile = window.innerWidth < 768,
     form = $('#contactForm');
 
-document.addEventListener('DOMContentLoaded', () => {
-    loading.remove();
+document.addEventListener('DOMContentLoaded', async () => {
+    loading.style.transform = 'translateY(-100%)';
+    await new Promise(res => setTimeout(() => res(loading.remove()), 1000));
     projectsGrid.innerHTML = data.projectHtml;
     skillsContainer.innerHTML = data.skillHtml;
     const observerOptions = {
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         threshold: 0.15
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');

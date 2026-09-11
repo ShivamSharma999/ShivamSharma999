@@ -24,6 +24,8 @@ Welcome to my GitHub profile! I'm a passionate web developer who loves building 
 - Git & GitHub
 - Vercel and Netlify
 - Supabase
+- Tavliy
+- Google GenAI  
 - VS Code and anitgravity
 
 ## 📈 GitHub Stats
@@ -32,7 +34,7 @@ Welcome to my GitHub profile! I'm a passionate web developer who loves building 
 
 ## 📫 Connect with Me
 
-- [LinkedIn](https://linkedin.com/in/shivam-sharma)
+- [LinkedIn](https://linkedin.com/in/shivam-sharma-aa258a357)
 - [Twitter](https://twitter.com/TheShivam9999)
 - [Email](mailto:shivam@sanatan.run.place)
 

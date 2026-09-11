@@ -127,6 +127,21 @@ lord-icon {
   padding: var(--section-padding);
 }
 
+.section.hero, .section#skills {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.section.hero {
+  background-image: url("../assets/bg-home.jpg");
+}
+
+.section#skills {
+  background-image: url("../assets/bg1.jpg");
+}
+
 .section-title {
   font-size: 2.5rem;
   font-weight: 800;
@@ -149,7 +164,7 @@ lord-icon {
 }
 
 .gradient-text {
-  background: var(--gradient-primary);
+  background: var(--gradient-2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -324,7 +339,7 @@ lord-icon {
   min-height: 5rem;
   margin-bottom: 0.5rem;
   line-height: 1.1;
-  border-right: 0.08em solid var(--accent-indigo);
+  border-right: 0.08em solid var(--accent-blue);
   animation: blink-caret 0.75s step-end infinite;
 }
 
@@ -901,7 +916,7 @@ lord-icon {
 
 /* Preloader */
 #preloader {
-  background: #222;
+  background: #151515;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -911,32 +926,37 @@ lord-icon {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  transition:
-    opacity 0.7s ease,
-    visibility 0.7s ease;
-}
-
-#preloader.hidden {
-  opacity: 0;
-  visibility: hidden;
+  transition: all 1s ease-out;
 }
 
 .loader {
-  border: 5px solid #0f0f13;
-  border-top: 5px solid #0ea5e9;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
+  font-family: "Seasons", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4rem;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(135deg, #f0f0f0 0%, #777 100%);
+  background-size: 200% 200%;
+  animation: moveBackground 3s linear infinite;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+@keyframes moveBackground {
+  0%, 100% {
+    background-position: 0 0;
   }
-  100% {
-    transform: rotate(360deg);
+  50% {
+    background-position: 100% 0; /* Moves right to left. Use positive 100% to reverse */
   }
+}
+
+@font-face {
+  font-family: "Seasons";
+  src: url("../assets/TheSeasons-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .skill-card lord-icon {
