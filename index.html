@@ -3,21 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta property="og:title" content="Shivam Sharma" />
-    <meta property="og:url" content="https://shivamsharma999.github.io/" />
+    <meta name="theme-color" content="#08111f" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="author" content="Shivam Sharma" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://shivam.click/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Shivam Sharma" />
+    <meta property="og:title" content="Shivam Sharma | Full-Stack Developer" />
+    <meta property="og:url" content="https://shivam.click/" />
+    <meta property="og:description" content="Portfolio of Shivam Sharma, a full-stack developer building thoughtful web experiences, desktop tools, and AI-powered products." />
     <meta
       property="og:image"
-      content="https://shivamsharma999.github.io/assets/logo.png"
+      content="https://shivam.click/assets/logo.png"
     />
-    <meta name="keyword" content="Shivam Sharma, Web Developer, Portfolio, Projects, Skills, Contact, shivam, shivam sharma, Shivam Dharma developer, Web developer" />
-    <meta name="description" content="Shivam Sharma's portfolio showcasing his web development skills and projects." />
+    <meta property="og:image:alt" content="Shivam Sharma portfolio logo" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Shivam Sharma | Full-Stack Developer" />
+    <meta name="twitter:description" content="Portfolio of Shivam Sharma, a full-stack developer building thoughtful web experiences, desktop tools, and AI-powered products." />
+    <meta name="twitter:image" content="https://shivam.click/assets/logo.png" />
+    <meta name="keywords" content="Shivam Sharma, full-stack developer, web developer, React, Next.js, JavaScript, portfolio, AI products" />
+    <meta name="description" content="Portfolio of Shivam Sharma, a full-stack developer building thoughtful web experiences, desktop tools, and AI-powered products." />
     <meta name="google-site-verification" content="bUq9gTph7XPEJE1BwcRWrmY9GCAOyG3XBj7cbrGeJDs" />
     <title>Shivam Sharma | Portfolio</title>
+    <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="css/Poppins/index.min.css" />
     <link rel="stylesheet" href="css/fontawesome/all.min.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" href="assets/logo.png" type="image/x-icon" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Shivam Sharma",
+        "url": "https://shivam.click/",
+        "jobTitle": "Full-Stack Developer",
+        "email": "mailto:shivam8299.sharma@gmail.com",
+        "image": "https://shivam.click/assets/shivam.jpg",
+        "sameAs": [
+          "https://github.com/shivamsharma999",
+          "https://www.linkedin.com/in/shivam-sharma-aa258a357/",
+          "https://twitter.com/TheShivam9999"
+        ],
+        "knowsAbout": ["JavaScript", "React", "Next.js", "Node.js", "MongoDB", "Generative AI"]
+      }
+    </script>
     <script type="module" src="./js/lordicon.js"></script>
   </head>
   <body>
@@ -33,7 +63,7 @@
           <img src="assets/logo.png" alt="Shivam Sharma" /> Shivam
         </a>
         <nav aria-label="Primary navigation">
-          <ul class="nav-links">
+          <ul class="nav-links" id="primary-navigation">
             <li><a class="nav-link active" href="#home">Home</a></li>
             <li><a class="nav-link" href="#about">About</a></li>
             <li><a class="nav-link" href="#skills">Skills</a></li>
@@ -45,6 +75,8 @@
           class="menu-toggle"
           type="button"
           aria-label="Toggle navigation"
+          aria-controls="primary-navigation"
+          aria-expanded="false"
         >
           <i class="fas fa-bars"></i>
         </button>

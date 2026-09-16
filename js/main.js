@@ -4,12 +4,13 @@ const $ = (selector) => document.querySelector(selector),
     typeWriter = $('.type-writer'),
     projectsGrid = $('#projects .project-grid'),
     skillsContainer = $('.skills-container'),
-    isMobile = window.innerWidth < 768,
-    form = $('#contactForm');
+    isMobile = window.innerWidth < 768;
 
-document.addEventListener('DOMContentLoaded', async () => {
-    loading.style.transform = 'translateY(-100%)';
-    await new Promise(res => setTimeout(() => res(loading.remove()), 1000));
+window.addEventListener('load', async () => {
+    if (loading) {
+        loading.style.transform = 'translateY(-100%)';
+        await new Promise(res => setTimeout(() => res(loading.remove()), 700));
+    }
     projectsGrid.innerHTML = data.projectHtml;
     skillsContainer.innerHTML = data.skillHtml;
     const observerOptions = {
@@ -33,13 +34,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.add('scrolled');
-            navbar.classList.remove('scrolled');
-        }
-    });
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
 
     window.dispatchEvent(new Event('scroll'));
     const navLinks = document.querySelectorAll('.nav-link');
@@ -72,6 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (menuToggle && navUl) {
         menuToggle.addEventListener('click', () => {
             const isActive = navUl.classList.toggle('nav-active');
+            menuToggle.setAttribute('aria-expanded', String(isActive));
             if (navIcon) {
                 navIcon.className = isActive ? 'fas fa-times' : 'fas fa-bars';
             }
@@ -81,6 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 navUl.classList.remove('nav-active');
+                menuToggle.setAttribute('aria-expanded', 'false');
                 if (navIcon) navIcon.className = 'fas fa-bars';
             });
         });
@@ -88,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
-const textArray = ["Shivam Sharma", `A Full${isMobile ? "s" : " S"}tack Developer`, "An UI/UX Enthusiast", "A Backend expert"];
+const textArray = ["Shivam Sharma", `A Full${isMobile ? "s" : " S"}tack Developer`, "A UI/UX Enthusiast", "A Backend Expert"];
 const typingDelay = 100;
 const erasingDelay = 50;
 const newTextDelay = 1500;
@@ -121,11 +119,18 @@ function erase() {
     }
 }
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const text = `Hello Shivam, I am ${formData.get('name')}.\n\n${formData.get('message')}\n\nYou can contact me back at ${formData.get('email')}`;
-    const mailtoLink = `mailto:shivam8299.sharma@gmail.com?subject=${encodeURIComponent(formData.get('subject'))}&body=${encodeURIComponent(text)}`;
-    window.open(mailtoLink, '_blank');
-})
-type();
+document.addEventListener('DOMContentLoaded', () => {
+    const form = $('#contactForm');
+
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const text = `Hello Shivam, I am ${formData.get('name')}.\n\n${formData.get('message')}\n\nYou can contact me back at ${formData.get('email')}`;
+            const mailtoLink = `mailto:shivam8299.sharma@gmail.com?subject=${encodeURIComponent(formData.get('subject'))}&body=${encodeURIComponent(text)}`;
+            window.location.href = mailtoLink;
+        });
+    }
+});
+
+if (typeWriter) type();

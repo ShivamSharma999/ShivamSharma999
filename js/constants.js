@@ -3,11 +3,20 @@ const projects = [
     {
         title: "Sanatan AI",
         shortDescription: "A Google Gen-AI powered chatbot that provides insights into Sanatan Dharma.",
-        description: "A Google Gen-AI powered NextJS fullstack chatbot that provides insights into Sanatan Dharma, answering questions and offering guidance on topics relating them to spiritual concepts. Availabe on desktop",
+        description: "A Google Gen-AI powered NextJS fullstack chatbot that provides insights into Sanatan Dharma, answering questions and offering guidance on topics relating them to spiritual concepts. It significantly utilizes the potential of major web technologies. Available on desktop and mobile.",
         image: "assets/sanatan-ai.png",
-        link: "https://sanatan-ai.vercel.app/",
+        link: "https://sanatan.shivam.click/",
         github: "https://github.com/thesanatanai/sanatanai",
         terms: ["OAuth", "Resend", "Vercel", "Gemini AI", "Spirituality", "NextJS", "React", "TauriJS", "Tavliy"]
+    },
+    {
+        title: "Sanatan Calendar",
+        shortDescription: "A Sanatan calendar app that provides users with mighty hindu calendar, tithi, nakshatras, festivals and auspicious days.",
+        description: "A Sanatan calendar app that provides users with information about tithi, nakshatras, and important dates and events related to Sanatan Dharma, including festivals, auspicious days, and other significant occasions.",
+        image: "assets/calendar.png",
+        link: "https://calendar.shivam.click/",
+        github: "https://github.com/thesanatanai/calendar",
+        terms: ["NextJS", "React", "Vercel", "TauriJS", "SEO", "Service Workers", "PWA"]
     },
     {
         title: "Bhagavat Gita",
@@ -93,12 +102,12 @@ const skills = [
 ];
 export const projectHtml = projects.map((project, index) => `
 <div class="project-card fade-up delay-${index % 4}">
- <img src="${project.image}" alt="${project.title}">
+ <img src="${project.image}" alt="Preview of ${project.title}" loading="lazy" decoding="async">
  <div class="project-info">
     <h3>${project.title}</h3>
     <p>${project.shortDescription}</p>
     <div class="project-terms">
-        ${project.terms.map(term => `<span class="term">${term}</span>`).join(', ')}
+        ${project.terms.map(term => `<span class="term">${term}</span>`).join('')}
     </div>
  </div>
 <div class="project-overlay">
@@ -106,8 +115,8 @@ export const projectHtml = projects.map((project, index) => `
     <h3>${project.title}</h3>
     <p>${project.description}</p>
     <div class="project-links">
-        ${project.link ? `<a href="${project.link}" target="_blank"><lord-icon src="./assets/icons/globe.json" trigger="hover" stroke="3"></lord-icon></a>` : ''}
-        ${project.github ? `<a href="${project.github}" target="_blank"><lord-icon src="./assets/icons/github.json" speed="2" stroke="3" trigger="hover"></lord-icon></a>` : ''}
+        ${project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.title} live site"><lord-icon src="./assets/icons/globe.json" trigger="hover" stroke="3"></lord-icon></a>` : ''}
+        ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" aria-label="View ${project.title} source code"><lord-icon src="./assets/icons/github.json" speed="2" stroke="3" trigger="hover"></lord-icon></a>` : ''}
     </div>
 </div></div>`).join('');
 
