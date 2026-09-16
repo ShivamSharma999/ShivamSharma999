@@ -7,7 +7,7 @@ Welcome to my GitHub profile! I'm a passionate web developer who loves building 
 - 🌱 Currently learning advanced JavaScript frameworks and backend development
 - 💼 Open to collaborations on exciting web projects
 - 📫 How to reach me: shivam8299.sharma@gmail.com
- or shivam@sanatan.run.place
+ or shivam@shivam.click
 
 ## 🛠️ Skills
 
