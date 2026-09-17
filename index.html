@@ -27,6 +27,7 @@
     <meta name="google-site-verification" content="bUq9gTph7XPEJE1BwcRWrmY9GCAOyG3XBj7cbrGeJDs" />
     <title>Shivam Sharma | Portfolio</title>
     <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="stylesheet" href="css/Poppins/index.min.css" />
     <link rel="stylesheet" href="css/fontawesome/all.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -51,10 +52,19 @@
     <script type="module" src="./js/lordicon.js"></script>
   </head>
   <body>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <div class="bg-abstract" aria-hidden="true"></div>
 
     <div id="preloader">
-      <div class="loader" aria-hidden="true">Shivam Sharma</div>
+      <div class="preloader-inner">
+        <div class="loader" aria-hidden="true">Shivam Sharma</div>
+        <div class="preloader-bar" aria-hidden="true"><span class="preloader-bar-fill"></span></div>
+        <span class="preloader-percent" aria-hidden="true">0%</span>
+      </div>
     </div>
 
     <header class="navbar" id="navbar">
@@ -85,8 +95,13 @@
 
     <main>
       <section class="hero section" id="home">
+        <div class="hero-orbs" aria-hidden="true">
+          <span class="orb orb-a"></span>
+          <span class="orb orb-b"></span>
+          <span class="orb orb-c"></span>
+        </div>
         <div class="container hero-container">
-          <div class="hero-content fade-up visible">
+          <div class="hero-content">
             <p class="greeting">Hello, I'm</p>
             <h1
               class="name gradient-text type-writer"
@@ -111,6 +126,9 @@
             </div>
           </div>
         </div>
+        <a href="#about" class="scroll-cue" aria-label="Scroll to the About section">
+          <span class="scroll-cue-mouse"><span class="scroll-cue-wheel"></span></span>
+        </a>
       </section>
 
       <section class="section about" id="about">
@@ -180,7 +198,7 @@
             Reach out if you want to collaborate or explore an idea together.
           </p>
           <div class="contact-content">
-            <div class="contact-info delay-1">
+            <div class="contact-info fade-up delay-1">
               <p>
                 <lord-icon src="./assets/icons/location.json" stroke="3" trigger="hover"></lord-icon> Sikar, Rajasthan, India
               </p>
@@ -281,6 +299,20 @@
       </div>
     </footer>
 
+    <button type="button" id="backToTop" class="back-to-top" aria-label="Scroll back to top">
+      <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Animation engine: GSAP (core + ScrollTrigger + SplitText, all free under the
+         2025 GreenSock/Webflow licensing change) and Lenis for buttery smooth scrolling.
+         Loaded as classic scripts before the module below so they're available on
+         window by the time js/main.js runs. If a CDN request ever fails, main.js
+         detects the missing global and quietly falls back to the non-animated
+         experience, so the site keeps working either way. -->
+    <script src="gsap/all.min.js"></script>
+    <script src="gsap/scrollTrigger.min.js"></script>
+    <script src="gsap/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
     <script type="module" src="js/main.js"></script>
   </body>
 </html>

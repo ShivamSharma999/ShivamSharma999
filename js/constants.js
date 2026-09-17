@@ -125,6 +125,9 @@ export const skillHtml = skills.map((skill, i) => `
         ${skill.icon ? `<i class="${skill.icon}" aria-hidden="true"></i>` : (skill.lordIcon ? `<lord-icon src="${skill.lordIcon}" speed="2" trigger="hover" target=".lordicon-${i}"></lord-icon>` : '')}
         <h3>${skill.name}</h3>
         <p>${skill.description}</p>
-        <div class="progress-bar"><span class="progress" style="width: ${skill.progress}%"></span></div>
+        <div class="progress-row">
+            <div class="progress-bar"><span class="progress" data-progress="${skill.progress}" style="width: 0%" role="progressbar" aria-valuenow="${skill.progress}" aria-valuemin="0" aria-valuemax="100" aria-label="${skill.name} proficiency"></span></div>
+            <span class="progress-value" aria-hidden="true">0%</span>
+        </div>
     </article>
 `).join('')

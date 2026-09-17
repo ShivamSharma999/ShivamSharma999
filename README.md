@@ -19,6 +19,7 @@ Welcome to my GitHub profile! I'm a passionate web developer who loves building 
 ### Frameworks & Libraries
 - React
 - Node.js
+- Next.jS
 
 ### Tools & Platforms
 - Git & GitHub

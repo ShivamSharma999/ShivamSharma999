@@ -9,6 +9,11 @@
   --accent-pink: #ec4899;
   --accent-blue: #0ea5e9;
 
+  --accent-indigo-rgb: 99, 102, 241;
+  --accent-pink-rgb: 236, 72, 153;
+  --accent-blue-rgb: 14, 165, 233;
+  --text-main-rgb: 226, 232, 240;
+
   --gradient-primary: linear-gradient(135deg, #115bcb 0%, #d125fc 100%);
   --gradient-2: linear-gradient(135deg, #ff6b6b 0%, #ffe66d 100%);
   --gradient-3: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
@@ -36,7 +41,12 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Smooth scrolling is handled by Lenis in js/main.js, which gives finer
+     control (easing, anchor offset for the fixed navbar) than the CSS
+     property and won't fight with it. If Lenis or its CDN request fails,
+     main.js falls back to scrollIntoView({behavior:'smooth'}) per-click,
+     so scrolling stays smooth either way without needing this. */
+  scroll-behavior: auto;
 }
 
 body {
@@ -62,6 +72,16 @@ body {
   z-index: -1;
   pointer-events: none;
   mix-blend-mode: screen;
+}
+
+.bg-abstract::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .bg-abstract::after {
@@ -426,6 +446,8 @@ lord-icon {
     box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .skill-card::before {
@@ -446,7 +468,9 @@ lord-icon {
 
 .skill-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(var(--accent-indigo-rgb), 0.25);
 }
 
 .skill-card h3 {
@@ -463,19 +487,36 @@ lord-icon {
   margin-bottom: 1rem;
 }
 
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 15px;
+}
+
 .skill-card .progress-bar {
+  flex: 1;
   background: #333;
   height: 10px;
   border-radius: 5px;
   overflow: hidden;
-  margin-top: 15px;
   opacity: 1;
   .progress {
     display: block;
     height: 100%;
+    width: 0%;
     background: var(--gradient-3);
     border-radius: 5px;
   }
+}
+
+.progress-value {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  min-width: 2.6em;
+  text-align: right;
 }
 
 .project-grid {
@@ -489,13 +530,22 @@ lord-icon {
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid transparent;
   position: relative;
-  transition: all 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .project-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-color: rgba(var(--accent-indigo-rgb), 0.35);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 45px rgba(var(--accent-pink-rgb), 0.18);
 }
 
 .project-card img {
@@ -564,11 +614,10 @@ lord-icon {
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.4s ease;
   transform: translateY(100%);
   transition:
     opacity 0.4s ease,
-    transform 0.4s ease;
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   color: white;
   padding: 20px;
   text-align: center;
@@ -753,28 +802,6 @@ lord-icon {
   color: var(--text-muted);
   font-family: var(--font-heading);
 }
-
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.delay-1 {
-  transition-delay: 0.2s;
-}
-.delay-2 {
-  transition-delay: 0.4s;
-}
-
-/* --- Responsive Breakpoints --- */
 
 /* Tablet & Smaller Desktops (1024px) */
 @media (max-width: 1024px) {
@@ -970,11 +997,6 @@ lord-icon {
   --lord-icon-secondary: var(--accent-blue);
 }
 
-.hero-content {
-  animation: hero-arrival 1s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-
 .btn-primary lord-icon {
   width: 1.3rem;
   height: 1.3rem;
@@ -990,11 +1012,6 @@ lord-icon {
 .image-wrapper:hover {
   transform: rotate(0deg) translateY(-8px);
   box-shadow: 22px 22px 0 rgba(255, 111, 145, 0.1), 0 28px 75px rgba(0, 0, 0, 0.4);
-}
-
-.skill-card .progress {
-  animation: progress-fill 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
-  transform-origin: left;
 }
 
 .project-card {
@@ -1054,16 +1071,6 @@ lord-icon {
   transform: translate(-50%, 0);
 }
 
-@keyframes hero-arrival {
-  from { opacity: 0; transform: translateY(22px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes progress-fill {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
 @media (max-width: 768px) {
   .hero::after {
     width: 18rem;
@@ -1081,11 +1088,309 @@ lord-icon {
   }
 }
 
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: var(--accent-blue);
+}
+
+.cursor-ring {
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border: 1.5px solid rgba(var(--text-main-rgb), 0.45);
+  transition:
+    width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.cursor-ring--active {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-color: var(--accent-indigo);
+  background: rgba(var(--accent-indigo-rgb), 0.12);
+}
+
+.cursor-ring--text {
+  opacity: 0 !important;
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor a,
+html.has-custom-cursor button,
+html.has-custom-cursor .btn,
+html.has-custom-cursor input,
+html.has-custom-cursor textarea,
+html.has-custom-cursor .menu-toggle {
+  cursor: none;
+}
+
+html.has-custom-cursor .cursor-dot,
+html.has-custom-cursor .cursor-ring {
+  opacity: 1;
+}
+
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  margin: -300px 0 0 -300px;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(circle, rgba(var(--accent-indigo-rgb), 0.1), transparent 70%);
+  will-change: transform;
+}
+
+html.has-custom-cursor .cursor-glow {
+  opacity: 1;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #222d 0%, #fff 20%, #fff 80%, #222d 100%);
+  transform: scaleX(0) translateX(-50%);
+  transform-origin: 0 50%;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+.preloader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.preloader-bar {
+  width: 200px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.preloader-bar-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--gradient-primary);
+  border-radius: 3px;
+}
+
+.preloader-percent {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.hero-orbs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  will-change: transform;
+}
+
+.orb-a {
+  width: 320px;
+  height: 320px;
+  background: rgba(var(--accent-indigo-rgb), 0.55);
+  top: 12%;
+  left: 8%;
+}
+
+.orb-b {
+  width: 260px;
+  height: 260px;
+  background: rgba(var(--accent-pink-rgb), 0.45);
+  bottom: 8%;
+  right: 10%;
+}
+
+.orb-c {
+  width: 200px;
+  height: 200px;
+  background: rgba(var(--accent-blue-rgb), 0.4);
+  top: 55%;
+  left: 55%;
+}
+
+/* --- Scroll cue --- */
+.scroll-cue {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.scroll-cue:hover {
+  opacity: 1;
+  color: var(--text-main);
+}
+
+.scroll-cue.is-hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.scroll-cue-mouse {
+  width: 24px;
+  height: 38px;
+  border: 1.5px solid currentColor;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.scroll-cue-wheel {
+  width: 3px;
+  height: 7px;
+  border-radius: 2px;
+  background: currentColor;
+  animation: scroll-cue-move 1.6s ease-in-out infinite;
+}
+
+@keyframes scroll-cue-move {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+/* --- Back to top --- */
+.back-to-top {
+  position: fixed;
+  right: 1.75rem;
+  bottom: 1.75rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: rgba(15, 15, 19, 0.75);
+  backdrop-filter: blur(10px);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 500;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    visibility 0.35s,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  border-color: var(--accent-indigo);
+  background: rgba(var(--accent-indigo-rgb), 0.15);
+  transform: translateY(-4px);
+}
+
+@media (max-width: 480px) {
+  .back-to-top {
+    right: 1.1rem;
+    bottom: 1.1rem;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* --- SplitText line-masking needs overflow hidden on the split container;
+   GSAP's SplitText applies this itself per-line, this is just a safety net
+   for the section-title text span while JS is still initializing. --- */
+.section-title span:not(.line) {
+  display: inline-block;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* The flourishes below are pure motion with no functional purpose, so
+     they're removed outright rather than just sped up. */
+  .cursor-dot,
+  .cursor-ring,
+  .cursor-glow,
+  .scroll-progress {
+    display: none !important;
+  }
+
+  .orb {
+    display: none;
+  }
+
+  .back-to-top {
+    transition: opacity 0.01ms, visibility 0.01ms;
   }
 }
