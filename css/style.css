@@ -1086,6 +1086,10 @@ lord-icon {
   .project-terms {
     justify-content: center;
   }
+  .loader {
+    font-size: 3rem;
+    text-align: center;
+  }
 }
 
 .cursor-dot,

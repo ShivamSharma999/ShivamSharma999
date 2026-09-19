@@ -372,7 +372,7 @@ function initSkillProgress() {
 function initTilt() {
     if (!motionEnabled || !hasFinePointer) return;
     document.querySelectorAll('.skill-card, .project-card, .contact-form').forEach((card) => {
-        const max = 8;
+    const max = 8;
     card.style.transition = "transform 0.4s cubic-bezier(0.16,1,0.3,1)";
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
